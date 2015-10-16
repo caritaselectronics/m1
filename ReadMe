@@ -1,0 +1,7 @@
+Helluy-Lafont Etienne
+Bizimungu Steve 
+
+File ctx.c  : contient la bibliothèque de gestin de contexte (switch_ctx(),init_ctx())
+Compilation:make 
+execution ./main
+

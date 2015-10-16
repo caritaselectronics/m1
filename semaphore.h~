@@ -1,0 +1,7 @@
+#ifndef DEF_SEM_H
+#define DEF_SEM_H
+
+typedef struct sem_s {
+  int sem_val;
+  struct ctx_s *sem_ctx_list ;
+}

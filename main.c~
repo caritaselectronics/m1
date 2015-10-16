@@ -1,0 +1,49 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+#include "ctx.h"
+
+void f_ping(void*arg);
+void f_pang(void*arg);
+void f_pong(void*arg);
+
+int main(){
+    create_ctx(16384, f_ping, NULL);
+    create_ctx(16384, f_pong, NULL);
+    create_ctx(16384, f_pang, NULL);
+    yield();
+    printf("end main\n");
+    return EXIT_SUCCESS;
+}
+
+void f_ping(void*args){
+    unsigned max=5;
+    while(max--){
+        printf("A");
+        yield();
+        printf("B");
+        yield();
+        printf("C");
+        yield();
+    }
+}
+
+void f_pong(void*args){
+    unsigned max=4;
+    while(max--){
+        printf("1");
+        yield();
+        printf("2");
+        yield();
+    }
+}
+
+void f_pang(void*args){
+    unsigned max=3;
+    while(max--){
+        printf("/");
+        yield();
+        printf("\\");
+        yield();
+    }
+}
