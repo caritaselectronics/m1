@@ -1,0 +1,12 @@
+
+#ifndef DEF_SEM_H
+#define DEF_SEM_H
+#include "ctx.h"
+typedef struct sem_s {
+  int *sem_val;
+  ctx_s *sem_ctx_list ;} ;
+
+void sem_up(struct sem_s sem);
+void sem_init(struct sem_s *sem, unsigned int val);
+void sem_up(struct sem_s sem);
+#endif

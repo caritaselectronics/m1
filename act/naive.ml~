@@ -21,7 +21,7 @@ let rec  max_l l =
   match l with
   | [x] -> x
    |x::l' -> (max x (max_l l'))
-(* |_ -> failwith "this case should never happen possible calculating max on empty list"*)
+ |[] -> failwith "this case should never happen possible calculating max on empty list"
 ;;
   
 let rec sum_l l =
@@ -74,13 +74,12 @@ let change_pos_to a b = if (b > 0) then a else  b
 	end
 	    
 ;;
-let poss_adv (m,n,t,s) =
-  if (m,n,t,s) = (1,1,1,1) then [(m,n,t,s)]
+let poss_adv (m,n,j,k) =
+  if (m,n,j,k) = (1,1,1,1) then [(m,n,j,k)]
   else
     begin   
   let l = ref  []
-  and j = t
-  and k = s
+  
     
 and  i = ref 1 in 
   while (!i<j )do
@@ -136,27 +135,33 @@ let matrix_index t (m,n,j,k) =
 (*parcourir toute la matrice en faisan make matrix pour chaque celulle*)
   
 
-  
+(*q4 programmation dynamique
+
+
+ 
+une version utilisant les tables de hachage de caml*)  
   
 
-let  f_d (m,n,i,j)=
-  let t = ref (Hashtbl.create ~random:false (m*n)) in
+let  f_d (o,p,s,v)=
+  let t = ref (Hashtbl.create ~random:false (o*p)) in
    Hashtbl.add (!t) (1,1,1,1) 0 ;
   let rec f (m,n,j,k)  =  
-  begin print_string "f()";
-		      try (Hashtbl.find (!t) (m,n,j,k)) with
-			not_found -> begin
-			  Hashtbl.add (!t) (m,n,j,k) (mat_formule (map (f) (poss_adv (m,n,i,j))));
-			  0 
+   
+    
+	try (Hashtbl.find (!t) (m,n,j,k)) with
+	|not_found -> begin
+		      	
+			
+		      Hashtbl.add (!t) (m,n,j,k) (mat_formule (map (f) (poss_adv (m,n,j,k))));
+		      
+			Hashtbl.find (!t) (m,n,j,k)
 			end
 				       
-		end
+				       
+	       
 	      
 		
   in
-  
- 
-  f (m,n,i,j) ;
- (Hashtbl.find (!t) (m,n,i,j))   
+  f (o,p,s,v)    
 ;;
   
